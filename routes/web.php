@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use \App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,15 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
 
-Route::get('/profile', function(){
-    return view('profile');
-})->name('profile');
+//Route::get('/profile', function(){
+//    return view('profile');
+//})->name('profile');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::group(['prefix' => 'profile'], function (){
+       Route::get('/', [ProfileController::class, 'index'])->name('account.profile');
+
+    });
+});
 
 require __DIR__.'/auth.php';

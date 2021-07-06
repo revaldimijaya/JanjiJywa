@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +25,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $roles = Role::all();
+        return view('auth.register', ['roles' => $roles]);
     }
 
     /**
@@ -33,22 +39,46 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:5|max:30',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'gender' => 'required',
+            'address' => 'required|max:200',
+            'role' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator->errors());
+        }
+        $path = "";
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $path = time().$file->getClientOriginalName();
+            Storage::putFileAs('public/profile', $file, $path);
+//            $path->move('profile', $path);
+        }
+
+
         $user = User::create([
+            'id' => Str::uuid(),
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'role_id' => $request->role,
+            'image' => $path
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return view('auth/login');
     }
 }
