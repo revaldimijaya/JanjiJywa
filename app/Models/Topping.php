@@ -5,16 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Beverage extends Model
+class Topping extends Model
 {
     use HasFactory;
-    public $incrementing = false;
-    protected $keyType = 'string';
-    protected $guarded = [];
-
-    public function beverageType(){
-        return $this->belongsTo(BeverageType::class);
-    }
 
     public function carts(){
         return $this->hasMany(Cart::class);

@@ -18,6 +18,21 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            backgroundColor: ['checked'],
+            borderColor: ['checked'],
+        },
+    },
+
+    checkbox:{
+        color: defaultTheme.colors.green,
+        backgroundColor: defaultTheme.colors.green[500],
+        borderColor: defaultTheme.borderColor.default,
+        '&:checked': {
+            borderColor: 'transparent',
+            backgroundColor: defaultTheme.colors.green[500],
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
         },
     },
 

@@ -19,6 +19,10 @@ class CreateBeveragesTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->integer('stock');
+            $table->string('image');
+            $table->string('custom_topping');
+            $table->string('custom_ice');
+            $table->string('custom_sugar');
             $table->timestamps();
         });
     }

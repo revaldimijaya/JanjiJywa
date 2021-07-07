@@ -60,7 +60,6 @@ class RegisteredUserController extends Controller
             $file = $request->file('image');
             $path = time().$file->getClientOriginalName();
             Storage::putFileAs('public/profile', $file, $path);
-//            $path->move('profile', $path);
         }
 
 

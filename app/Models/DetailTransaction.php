@@ -18,4 +18,16 @@ class DetailTransaction extends Model
     public function beverage(){
         return $this->belongsTo(Beverage::class);
     }
+
+    public function topping(){
+        return $this->belongsTo(Topping::class);
+    }
+
+    public function ice(){
+        return $this->belongsTo(Ice::class);
+    }
+
+    public function sugar(){
+        return $this->belongsTo(Sugar::class);
+    }
 }
