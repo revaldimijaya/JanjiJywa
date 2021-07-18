@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetailTransaction extends Model
 {
     use HasFactory;
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $guarded = [];
 
     public function headerTransaction(){
         return $this->belongsTo(HeaderTransaction::class);
@@ -19,15 +18,4 @@ class DetailTransaction extends Model
         return $this->belongsTo(Beverage::class);
     }
 
-    public function topping(){
-        return $this->belongsTo(Topping::class);
-    }
-
-    public function ice(){
-        return $this->belongsTo(Ice::class);
-    }
-
-    public function sugar(){
-        return $this->belongsTo(Sugar::class);
-    }
 }

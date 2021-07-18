@@ -18,13 +18,13 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('account.profile')" :active="request()->routeIs('profile')">
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
                         {{ __('Cart') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('account.profile')" :active="request()->routeIs('profile')">
+                    <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
                         {{ __('History') }}
                     </x-nav-link>
                 </div>

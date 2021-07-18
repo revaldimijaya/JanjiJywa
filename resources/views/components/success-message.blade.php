@@ -1,5 +1,5 @@
 @if (Session::has('success'))
-    <div class="rounded-md bg-green-50 p-4">
+    <div class="rounded-md bg-green-50 p-4 m-4">
         <div class="flex">
             <div class="flex-shrink-0">
                 <!-- Heroicon name: solid/check-circle -->

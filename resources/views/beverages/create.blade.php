@@ -78,6 +78,21 @@
                 </li>
 
                 <li class="py-4">
+                    <div>
+                        <div class="flex justify-between">
+                            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                            <span class="text-sm text-gray-500" id="email-optional">Required</span>
+                        </div>
+                        <div class="mt-1">
+                            <textarea id="description" name="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Coffee with dalgona"></textarea>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500">
+                            Brief description for new beverage.
+                        </p>
+                    </div>
+                </li>
+
+                <li class="py-4">
                     <fieldset>
                         <div class="flex justify-between">
                             <label for="type" class="block text-sm font-medium text-gray-700">Adds On</label>

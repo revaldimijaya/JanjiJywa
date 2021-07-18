@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             BeverageTypeSeeder::class,
+            IceSeeder::class,
+            ToppingSeeder::class,
+            SugarSeeder::class,
+            BeverageSeeder::class
         ]);
 
     }

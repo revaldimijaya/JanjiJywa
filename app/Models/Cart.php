@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $guarded = [];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -17,17 +16,5 @@ class Cart extends Model
 
     public function beverage(){
         return $this->belongsTo(Beverage::class);
-    }
-
-    public function topping(){
-        return $this->belongsTo(Topping::class);
-    }
-
-    public function ice(){
-        return $this->belongsTo(Ice::class);
-    }
-
-    public function sugar(){
-        return $this->belongsTo(Sugar::class);
     }
 }
