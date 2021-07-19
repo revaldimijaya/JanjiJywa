@@ -12,11 +12,11 @@
             @forelse($users as $user)
             <ul class="divide-y divide-gray-200">
                 <li>
-                    <a href="{{route('customer.detail', ['id' => $user->id])}}" class="block hover:bg-gray-50">
+                    <div href="{{route('customer.detail', ['id' => $user->id])}}" class="block hover:bg-gray-50">
                         <div class="flex items-center px-4 py-4 sm:px-6">
                             <div class="min-w-0 flex-1 flex items-center">
                                 <div class="flex-shrink-0">
-                                    <img class="h-12 w-12 rounded-full" src="/public/storage/profile/{{$user->image}}" alt="">
+                                    <img class="h-12 w-12 rounded-full" src="{{asset('/profile'.$user->image)}}" alt="">
                                 </div>
                                 <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                                     <div>
@@ -64,7 +64,7 @@
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-
+                        </div>
                     </a>
                 </li>
             </ul>
