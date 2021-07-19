@@ -147,7 +147,7 @@
                                         @if($beverage->image == "")
                                         <i class="fa fa-cloud-upload fa-3x text-gray-200" id="fontawesome"></i>
                                         @else
-                                        <img class="w-20" src={{"/storage/beverage/$beverage->image"}} alt="" id="photo-preview">
+                                        <img class="w-20" src="{{asset('/storage/beverage'.$beverage->image)}}" alt="" id="photo-preview">
                                         @endif
                                         <span class="block text-blue-400 font-normal">Browse files</span>
                                     </div>

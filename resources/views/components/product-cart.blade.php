@@ -1,7 +1,7 @@
 
 <div class="lg:w-4/5 md:w-full md:px-4 flex justify-center items-center p-2 flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-200" style="">
     <div class="flex w-24">
-        <img src="/storage/beverage/{{$cart->image}}">
+        <img src="{{ asset('/beverage/'.$cart->image) }}">
     </div>
     <div class="flex-auto text-sm w-32 ml-4">
         <div class="font-bold py-2">{{$cart->name}}</div>

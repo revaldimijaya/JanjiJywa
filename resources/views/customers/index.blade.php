@@ -8,6 +8,7 @@
     <div class="my-5 py-2 bg-white flex-col justify-center shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8">
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="my-2 bg-white shadow overflow-hidden sm:rounded-md">
+
             @forelse($users as $user)
             <ul class="divide-y divide-gray-200">
                 <li>
@@ -15,7 +16,7 @@
                         <div class="flex items-center px-4 py-4 sm:px-6">
                             <div class="min-w-0 flex-1 flex items-center">
                                 <div class="flex-shrink-0">
-                                    <img class="h-12 w-12 rounded-full" src="/storage/profile/{{$user->image}}" alt="">
+                                    <img class="h-12 w-12 rounded-full" src="/public/storage/profile/{{$user->image}}" alt="">
                                 </div>
                                 <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                                     <div>
@@ -63,14 +64,14 @@
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                        </div>
+
                     </a>
                 </li>
             </ul>
 
             @empty
                 <div class="flex justify-between">
-                    <label for="price" class="block text-sm font-medium text-gray-700">There is no customer :(</label>
+                    <label for="price" class="p-2 block text-sm font-medium text-gray-700">There is no customer :(</label>
                 </div>
             @endforelse
         </div>

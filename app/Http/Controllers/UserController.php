@@ -18,13 +18,15 @@ class UserController extends Controller
     public function index()
     {
         $users = DB::table('roles')
-            ->leftJoin('users', 'roles.id','=','users.role_id')
+            ->join('users', 'roles.id','=','users.role_id')
             ->where('roles.name','=','Customer')
             ->get();
-        foreach ($users as $user){
-
-            $user->created_at = Carbon::parse($user->created_at)->toDayDateTimeString();
+        if(!empty($users)){
+            foreach ($users as $user){
+                $user->created_at = Carbon::parse($user->created_at)->toDayDateTimeString();
+            }
         }
+
 
         return view('customers.index', ['users' => $users]);
     }
@@ -58,8 +60,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
+
         $user = User::where('id', '=', $id)->withTrashed()->first();
-        $user->created_at = Carbon::parse($user->created_at)->toDayDateTimeString();
+        if(!empty($user)){
+            $user->created_at = Carbon::parse($user->created_at)->toDayDateTimeString();
+        }
+
         return view('customers.detail',['user' => $user]);
     }
 

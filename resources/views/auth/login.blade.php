@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="hidden lg:block relative w-0 flex-1">
-                <img class="absolute inset-0 h-full w-full object-cover" src="/storage/banner/login.jpg" alt="">
+                <img class="absolute inset-0 h-full w-full object-cover" src="{{asset('/storage/banner/login.jpg')}}" alt="">
             </div>
         </div>
 

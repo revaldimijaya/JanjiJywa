@@ -43,7 +43,7 @@
     <div class="overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="sliderAx h-auto">
             <div id="slider-1" class="container mx-auto">
-                <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill" style="background-image: url(/storage/banner/banner1.jpg)">
+                <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill" style="background-image: url({{asset('/storage/banner/banner1.jpg')}})">
                     <div class="md:w-1/2">
                         <p class="font-bold text-sm uppercase">Welcome to</p>
                         <p class="text-3xl font-bold">Janji Jywa</p>
@@ -55,7 +55,7 @@
             </div>
 
             <div id="slider-2" class="container mx-auto">
-                <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill" style="background-image: url(/storage/banner/banner3.jpg)">
+                <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill" style="background-image: url({{asset('/storage/banner/banner3.jpg')}})">
                     <div class="md:w-1/2">
                     <p class="font-bold text-sm uppercase">View your profile</p>
                     <p class="text-3xl font-bold">Janji Jywa</p>

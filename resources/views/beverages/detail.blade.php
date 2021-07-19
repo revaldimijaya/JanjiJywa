@@ -11,7 +11,7 @@
                 <div class="container px-5 py-24 mx-auto">
                     <x-success-message></x-success-message>
                     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-                        <img alt="ecommerce" class="lg:w-1/2 w-full object-none object-center rounded border border-gray-200" src="/storage/beverage/{{$beverage->image}}">
+                        <img alt="ecommerce" class="lg:w-1/2 w-full object-none object-center rounded border border-gray-200" src="{{asset('/storage/beverage/'.$beverage->image)}}">
                         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                             <x-auth-validation-errors :value="$errors"></x-auth-validation-errors>
 
