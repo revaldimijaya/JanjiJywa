@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $roles = Role::where('name','Admin')->first();
+        $roles_ceo = Role::where('name','CEO')->first();
 
         $user = new User();
         $user->id = Str::uuid();
@@ -30,6 +31,16 @@ class UserSeeder extends Seeder
         $user->gender = "Male";
         $user->address = "JL. Anggrek";
         $user->role_id = $roles->id;
+        $user->save();
+
+        $user = new User();
+        $user->id = Str::uuid();
+        $user->name = "ceo";
+        $user->email = "ceo@aceo.com";
+        $user->password = Hash::make("ceo");
+        $user->gender = "Male";
+        $user->address = "JL. Anggrek";
+        $user->role_id = $roles_ceo->id;
         $user->save();
     }
 }
