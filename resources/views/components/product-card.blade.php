@@ -7,7 +7,13 @@
                 <p class="leading-relaxed">{{ \Illuminate\Support\Str::limit($beverage->description, 25, $end='...') }}</p>
                 <div class="flex items-center">
                     <span class="title-font font-small text-l text-green-500">Rp. {{$beverage->price}}</span>
-                    <button onclick="window.location='{{ route("beverage.detail", ['beverage' => $beverage->id]) }}'" class="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">Order</button>
+                    @auth()
+                    @if(auth()->user()->role->name === "Admin")
+                        <button onclick="{{ route("manage.edit", ['id' => $beverage->id]) }}" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Manage</button>
+                    @elseif(auth()->user()->role->name === "Customer")
+                        <button onclick="window.location='{{ route("beverage.detail", ['beverage' => $beverage->id]) }}'" class="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">Order</button>
+                    @endif
+                    @endauth
                 </div>
             </div>
         </div>

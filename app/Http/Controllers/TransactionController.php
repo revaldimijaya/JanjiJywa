@@ -32,7 +32,9 @@ class TransactionController extends Controller
             ->join('beverages', 'beverages.id', '=', 'detail_transactions.beverage_id')
             ->groupBy('detail_transactions.transaction_id', 'date')
             ->where('user_id', '=', Auth::id())->get();
-
+        foreach ($headers as $header){
+            $header->date = Carbon::parse($header->date)->toDayDateTimeString();
+        }
         return view('histories.index', ['headers' => $headers]);
     }
 
@@ -66,7 +68,13 @@ class TransactionController extends Controller
             if($cart->sum_quantity > $cart->stock){
                 return back()->withErrors($cart->name." quantity must be less than equals ".$cart->stock);
             }
+
+            DB::table('beverages')
+                ->where('id', '=', $cart->beverage_id)
+                ->update(['stock' => $cart->stock - $cart->sum_quantity]);
         }
+
+
 
         $header = new HeaderTransaction();
         $header->id = Str::uuid();

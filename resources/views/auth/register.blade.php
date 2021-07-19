@@ -98,7 +98,7 @@
                 <x-label for="role" :value="__('Role')"></x-label>
                 <select class="mt-1 form-select block w-full mt-1" name="role" id="role">
                     @foreach($roles as $role)
-                        @if($role->name != "Admin")
+                        @if($role->name != "CEO")
                             <option value={{$role->id}}>{{$role->name}}</option>
                         @endif
                     @endforeach

@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
             'gender' => 'required',
             'address' => 'required|max:200',
             'role' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
 
