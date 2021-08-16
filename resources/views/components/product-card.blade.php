@@ -14,6 +14,10 @@
                         <button onclick="window.location='{{ route("beverage.detail", ['beverage' => $beverage->id]) }}'" class="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">Order</button>
                     @endif
                     @endauth
+                    @guest
+                        <button onclick="window.location='{{ route("login")}}'" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Login</button>
+                    @endguest
+
                 </div>
             </div>
         </div>

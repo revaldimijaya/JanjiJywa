@@ -1,6 +1,7 @@
 <x-app-layout>
+    
     <x-slot name="header">
-        <form action="/">
+        {{-- <form action="/">
         <div class="flex rounded-full border-grey-light border">
             <button type="submit">
               <span class="w-auto flex justify-center outline-none items-center text-grey py-2 px-4">
@@ -10,7 +11,7 @@
             <input name="search" class="w-full border-none rounded mr-4" value="{{old('search')?? ''}}" type="search" placeholder="Search...">
 
         </div>
-        </form>
+        </form> --}}
     </x-slot>
 
     <div class="my-5 overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 bg-indigo-600">
@@ -78,91 +79,110 @@
     </div>
 
     <div class="my-5 bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 sm:py-6 lg:px-8 lg:py-8">
-        <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-x-4 gap-y-4 items-center justify-center">
-            @forelse($beverages as $beverage)
-                <x-product-card
-                    :beverage="$beverage"
-                    >
-
-                </x-product-card>
-
-            @empty
-                <div class="flex justify-between">
-                    <label for="price" class="block text-sm font-medium text-gray-700">There is no product :(</label>
-                </div>
-            @endforelse
+        <div id="beverages" class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-x-4 gap-y-4 items-center justify-center">
+            
+           
         </div>
     </div>
-
+   
     <script>
-        var cont=0;
-        function loopSlider(){
-            var xx= setInterval(function(){
-                switch(cont)
-                {
-                    case 0:{
-                        $("#slider-1").fadeOut(400);
-                        $("#slider-2").delay(400).fadeIn(400);
-                        $("#sButton1").removeClass("bg-purple-800");
-                        $("#sButton2").addClass("bg-purple-800");
-                        cont=1;
+        // var cont=0;
+        // function loopSlider(){
+        //     var xx= setInterval(function(){
+        //         switch(cont)
+        //         {
+        //             case 0:{
+        //                 $("#slider-1").fadeOut(400);
+        //                 $("#slider-2").delay(400).fadeIn(400);
+        //                 $("#sButton1").removeClass("bg-purple-800");
+        //                 $("#sButton2").addClass("bg-purple-800");
+        //                 cont=1;
 
-                        break;
-                    }
-                    case 1:
-                    {
+        //                 break;
+        //             }
+        //             case 1:
+        //             {
 
-                        $("#slider-2").fadeOut(400);
-                        $("#slider-1").delay(400).fadeIn(400);
-                        $("#sButton2").removeClass("bg-purple-800");
-                        $("#sButton1").addClass("bg-purple-800");
+        //                 $("#slider-2").fadeOut(400);
+        //                 $("#slider-1").delay(400).fadeIn(400);
+        //                 $("#sButton2").removeClass("bg-purple-800");
+        //                 $("#sButton1").addClass("bg-purple-800");
 
-                        cont=0;
+        //                 cont=0;
 
-                        break;
-                    }
-
-
-                }},8000);
-
-        }
-
-        function reinitLoop(time){
-            clearInterval(xx);
-            setTimeout(loopSlider(),time);
-        }
+        //                 break;
+        //             }
 
 
+        //         }},8000);
 
-        function sliderButton1(){
+        // }
 
-            $("#slider-2").fadeOut(400);
-            $("#slider-1").delay(400).fadeIn(400);
-            $("#sButton2").removeClass("bg-purple-800");
-            $("#sButton1").addClass("bg-purple-800");
-            reinitLoop(4000);
-            cont=0
-
-        }
-
-        function sliderButton2(){
-            $("#slider-1").fadeOut(400);
-            $("#slider-2").delay(400).fadeIn(400);
-            $("#sButton1").removeClass("bg-purple-800");
-            $("#sButton2").addClass("bg-purple-800");
-            reinitLoop(4000);
-            cont=1
-
-        }
-
-        $(window).ready(function(){
-            $("#slider-2").hide();
-            $("#sButton1").addClass("bg-purple-800");
+        // function reinitLoop(time){
+        //     clearInterval(xx);
+        //     setTimeout(loopSlider(),time);
+        // }
 
 
-            loopSlider();
-        });
+
+        // function sliderButton1(){
+
+        //     $("#slider-2").fadeOut(400);
+        //     $("#slider-1").delay(400).fadeIn(400);
+        //     $("#sButton2").removeClass("bg-purple-800");
+        //     $("#sButton1").addClass("bg-purple-800");
+        //     reinitLoop(4000);
+        //     cont=0
+
+        // }
+
+        // function sliderButton2(){
+        //     $("#slider-1").fadeOut(400);
+        //     $("#slider-2").delay(400).fadeIn(400);
+        //     $("#sButton1").removeClass("bg-purple-800");
+        //     $("#sButton2").addClass("bg-purple-800");
+        //     reinitLoop(4000);
+        //     cont=1
+
+        // }
+
+        // $(window).ready(function(){
+        //     $("#slider-2").hide();
+        //     $("#sButton1").addClass("bg-purple-800");
 
 
-    </script>
+        //     loopSlider();
+        // });
+        $.ajax({
+            type: 'GET',
+            url: "{{route('beverage.get')}}",
+            dataType: 'json',
+            success: function (data) {
+                $.each(data.beverage, function(key, item) { 
+                    $('#beverages').append(
+                        `<section class="text-gray-700 body-font overflow-hidden bg-white rounded border border-gray-200">\
+                            <div class="container px-2 py-2 mx-auto">\
+                                <div class="mx-auto flex flex-col">\
+                                    <img alt="ecommerce" class="h-64 object-cover object-center rounded border border-gray-200" src="{{asset('/storage/beverage)}}">\
+                                    <div class="flex flex-col">\
+                                        <h1 class="text-gray-900 text-xl title-font font-small mb-1 mt-1">'+item.name+'</h1>\
+                                        <p class="leading-relaxed">{{ \Illuminate\Support\Str::limit(item.description, 25, $end='...') }}</p>\
+                                        <div class="flex items-center">\
+                                            <span class="title-font font-small text-l text-green-500">Rp. '+item.price+'</span>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </section>`
+                    )
+                   
+                    
+                });
+                
+            }
+        })
+
+
+    </script> 
+
 </x-app-layout>

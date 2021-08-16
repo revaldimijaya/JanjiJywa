@@ -22,12 +22,14 @@ class BeverageController extends Controller
      */
     public function index()
     {
+    
         $beverages = DB::table('beverages');
         if(\request()->has('search') && \request()->get('search') != ''){
             $beverages = $beverages->where('name', '=', \request()->get('search'));
         }
-        $beverages = $beverages->paginate(15);
-        return view('home', ['beverages' => $beverages]);
+        
+        $result['beverage'] = $beverages->get();
+        return response()->json($result);
     }
 
     /**
