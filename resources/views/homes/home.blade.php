@@ -1,7 +1,6 @@
 <x-app-layout>
-    
     <x-slot name="header">
-        {{-- <form action="/">
+        <form action="/">
         <div class="flex rounded-full border-grey-light border">
             <button type="submit">
               <span class="w-auto flex justify-center outline-none items-center text-grey py-2 px-4">
@@ -11,7 +10,7 @@
             <input name="search" class="w-full border-none rounded mr-4" value="{{old('search')?? ''}}" type="search" placeholder="Search...">
 
         </div>
-        </form> --}}
+        </form>
     </x-slot>
 
     <div class="my-5 overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 bg-indigo-600">
@@ -42,9 +41,9 @@
     </div>
 
     <div class="overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="sliderAx h-auto">
-            <div id="slider-1" class="container mx-auto">
-                <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill" style="background-image: url({{asset('/storage/banner/banner1.jpg')}})">
+        <div class="sliderAx h-auto" style="transition: left 0.5s">
+            <div id="slider-1" class="my-banner container mx-auto">
+                <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill" style="background-image: url({{asset('/images/banners/banner1.jpg')}})">
                     <div class="md:w-1/2">
                         <p class="font-bold text-sm uppercase">Welcome to</p>
                         <p class="text-3xl font-bold">Janji Jywa</p>
@@ -55,8 +54,8 @@
                 <br>
             </div>
 
-            <div id="slider-2" class="container mx-auto">
-                <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill" style="background-image: url({{asset('/storage/banner/banner3.jpg')}})">
+            <div id="slider-2" class="my-banner container mx-auto">
+                <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill" style="background-image: url({{asset('/images/banners/banner3.jpg')}})">
                     <div class="md:w-1/2">
                     <p class="font-bold text-sm uppercase">View your profile</p>
                     <p class="text-3xl font-bold">Janji Jywa</p>
@@ -79,110 +78,57 @@
     </div>
 
     <div class="my-5 bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 sm:py-6 lg:px-8 lg:py-8">
-        <div id="beverages" class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-x-4 gap-y-4 items-center justify-center">
-            
-           
+        <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-x-4 gap-y-4 items-center justify-center">
+            @forelse($beverages as $beverage)
+                <x-product-card
+                    :beverage="$beverage"
+                    >
+
+                </x-product-card>
+
+            @empty
+                <div class="flex justify-between">
+                    <label for="price" class="block text-sm font-medium text-gray-700">There is no product :(</label>
+                </div>
+            @endforelse
         </div>
     </div>
-   
+
     <script>
-        // var cont=0;
-        // function loopSlider(){
-        //     var xx= setInterval(function(){
-        //         switch(cont)
-        //         {
-        //             case 0:{
-        //                 $("#slider-1").fadeOut(400);
-        //                 $("#slider-2").delay(400).fadeIn(400);
-        //                 $("#sButton1").removeClass("bg-purple-800");
-        //                 $("#sButton2").addClass("bg-purple-800");
-        //                 cont=1;
-
-        //                 break;
-        //             }
-        //             case 1:
-        //             {
-
-        //                 $("#slider-2").fadeOut(400);
-        //                 $("#slider-1").delay(400).fadeIn(400);
-        //                 $("#sButton2").removeClass("bg-purple-800");
-        //                 $("#sButton1").addClass("bg-purple-800");
-
-        //                 cont=0;
-
-        //                 break;
-        //             }
-
-
-        //         }},8000);
-
-        // }
-
-        // function reinitLoop(time){
-        //     clearInterval(xx);
-        //     setTimeout(loopSlider(),time);
-        // }
-
-
-
-        // function sliderButton1(){
-
-        //     $("#slider-2").fadeOut(400);
-        //     $("#slider-1").delay(400).fadeIn(400);
-        //     $("#sButton2").removeClass("bg-purple-800");
-        //     $("#sButton1").addClass("bg-purple-800");
-        //     reinitLoop(4000);
-        //     cont=0
-
-        // }
-
-        // function sliderButton2(){
-        //     $("#slider-1").fadeOut(400);
-        //     $("#slider-2").delay(400).fadeIn(400);
-        //     $("#sButton1").removeClass("bg-purple-800");
-        //     $("#sButton2").addClass("bg-purple-800");
-        //     reinitLoop(4000);
-        //     cont=1
-
-        // }
-
-        // $(window).ready(function(){
-        //     $("#slider-2").hide();
-        //     $("#sButton1").addClass("bg-purple-800");
-
-
-        //     loopSlider();
-        // });
-        $.ajax({
-            type: 'GET',
-            url: "{{route('beverage.get')}}",
-            dataType: 'json',
-            success: function (data) {
-                $.each(data.beverage, function(key, item) { 
-                    $('#beverages').append(
-                        `<section class="text-gray-700 body-font overflow-hidden bg-white rounded border border-gray-200">\
-                            <div class="container px-2 py-2 mx-auto">\
-                                <div class="mx-auto flex flex-col">\
-                                    <img alt="ecommerce" class="h-64 object-cover object-center rounded border border-gray-200" src="{{asset('/storage/beverage)}}">\
-                                    <div class="flex flex-col">\
-                                        <h1 class="text-gray-900 text-xl title-font font-small mb-1 mt-1">'+item.name+'</h1>\
-                                        <p class="leading-relaxed">{{ \Illuminate\Support\Str::limit(item.description, 25, $end='...') }}</p>\
-                                        <div class="flex items-center">\
-                                            <span class="title-font font-small text-l text-green-500">Rp. '+item.price+'</span>\
-                                        </div>\
-                                    </div>\
-                                </div>\
-                            </div>\
-                        </section>`
-                    )
-                   
-                    
-                });
-                
+        
+        var slideIdx = 0;
+        showSlides();
+        function showSlides(){
+            
+            var banners = document.getElementsByClassName('my-banner');
+            for(let i = 0 ; i < banners.length ; i++){
+                banners[i].style.display = "none";
             }
-        })
 
+            $(`#slider-${slideIdx+1}`).fadeIn("slow");
+            $(`#sButton${slideIdx+1}`).addClass("bg-purple-800");
+            slideIdx++;
 
-    </script> 
+            if(slideIdx + 1 > banners.length){
+                slideIdx = 0;
+            }
+            $(`#sButton${slideIdx+1}`).removeClass("bg-purple-800");
+            setTimeout(showSlides, 5000);
+        }
 
+        function sliderButton1(){
+            $(`#slider-2`).hide();
+            $(`#slider-1`).fadeIn("slow");
+            $(`#sButton1`).addClass("bg-purple-800");
+            $(`#sButton2`).removeClass("bg-purple-800");
+        }
+        
+        function sliderButton2(){
+            $(`#slider-1`).hide();
+            $(`#slider-2`).fadeIn("slow");
+            $(`#sButton2`).addClass("bg-purple-800");
+            $(`#sButton1`).removeClass("bg-purple-800");
+        }
+
+    </script>
 </x-app-layout>

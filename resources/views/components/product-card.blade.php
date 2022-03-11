@@ -1,7 +1,7 @@
 <section class="text-gray-700 body-font overflow-hidden bg-white rounded border border-gray-200">
     <div class="container px-2 py-2 mx-auto">
         <div class="mx-auto flex flex-col">
-            <img alt="ecommerce" class="h-64 object-cover object-center rounded border border-gray-200" src="{{asset('/storage/beverage/'.$beverage->image)}}">
+            <img alt="ecommerce" class="h-64 object-cover object-center rounded border border-gray-200" src="{{asset('/images/beverages/'.$beverage->image)}}">
             <div class="flex flex-col">
                 <h1 class="text-gray-900 text-xl title-font font-small mb-1 mt-1">{{$beverage->name}}</h1>
                 <p class="leading-relaxed">{{ \Illuminate\Support\Str::limit($beverage->description, 25, $end='...') }}</p>
